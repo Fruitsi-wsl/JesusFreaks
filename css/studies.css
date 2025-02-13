@@ -55,6 +55,10 @@ nav ul li a {
 
 }
 
+.header h1{
+    -webkit-text-stroke: 1px rgb(255, 255, 255);
+}
+
 .TopSection{
     display: flex;
     flex-direction: row;
@@ -70,24 +74,34 @@ nav ul li a {
 }
 
 .TopSection div{
+    display: flex;
+    flex-direction: column;
     flex: 1; /* Makes all child divs equal width */
-    height: 300px; /* Sets a fixed height */
+    height: 400px; /* Sets a fixed height */
     width: 300px;
-    background-color: rgb(0, 0, 0); /* Just for visibility */
     text-align: center;
     line-height: 100px; /* Centers text vertically */
     border: 1px solid black; /* Adds a border for visibility */
     margin: 40px;
+    margin-top: 5px;
+    justify-content: start;
+    align-items: center;
+    -webkit-text-stroke: 1px rgb(255, 255, 255);
 }
 .BottomSection div {
+    display: flex;
+    flex-direction: column;
     flex: 1; /* Makes all child divs equal width */
-    height: 300px; /* Sets a fixed height */
+    height: 400px; /* Sets a fixed height */
     width: 300px;
-    background-color: rgb(0, 0, 0); /* Just for visibility */
     text-align: center;
     line-height: 100px; /* Centers text vertically */
     border: 1px solid black; /* Adds a border for visibility */
     margin: 20px;
     margin-left: 40px;
     margin-right: 40px;
+    justify-content: start;
+    align-items: center;
+    -webkit-text-stroke: 1px rgb(255, 255, 255);
 }
+
