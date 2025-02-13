@@ -25,7 +25,6 @@ header {
 
 header h1 {
     text-align: center;
-    margin-left: 20px;
 }
 
 nav {
@@ -66,4 +65,8 @@ nav ul li a {
     font-size: 35px;
     color: black;
     -webkit-text-stroke: 1px rgb(255, 255, 255);
+}
+
+#Jesus{
+    height: 400px
 }
