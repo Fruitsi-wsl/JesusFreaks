@@ -35,11 +35,17 @@ nav {
 
 nav ul {
     list-style-type: none;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 40px;
 }
 
 nav ul li {
     display: inline-block;
     margin-left: 20px;
+    font-family: Arial, sans-serif;
+
+
 }
 
 nav ul li a {
@@ -78,14 +84,19 @@ nav ul li a {
     flex-direction: column;
     flex: 1; /* Makes all child divs equal width */
     height: 400px; /* Sets a fixed height */
-    width: 300px;
+    width: 400px;
     text-align: center;
     line-height: 100px; /* Centers text vertically */
-    border: 1px solid black; /* Adds a border for visibility */
-    margin: 40px;
+    margin: 20px;
     margin-top: 5px;
     justify-content: start;
     align-items: center;
+    background-image: url("../assets/images/Paper.png");
+    background-size: cover;
+}
+
+.TopSection h1{
+    margin: 0px;
     -webkit-text-stroke: 1px rgb(255, 255, 255);
 }
 .BottomSection div {
@@ -93,15 +104,41 @@ nav ul li a {
     flex-direction: column;
     flex: 1; /* Makes all child divs equal width */
     height: 400px; /* Sets a fixed height */
-    width: 300px;
+    width: 400px;
     text-align: center;
     line-height: 100px; /* Centers text vertically */
-    border: 1px solid black; /* Adds a border for visibility */
     margin: 20px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
     justify-content: start;
     align-items: center;
+    background-image: url("../assets/images/Paper.png");
+    background-size: cover;
+
+}
+
+.BottomSection h1{
     -webkit-text-stroke: 1px rgb(255, 255, 255);
 }
 
+ul {
+    list-style-type: none;  /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+    font-size: 18px;  /* Decrease font size of the list */
+    line-height: 1.5;  /* Adjust line spacing */
+    text-align: left;
+}
+
+li {
+    margin-bottom: 5px;  /* Adds space between list items */
+    margin-left: 20px;
+    font-family: 'Segoe Script', cursive;
+}
+
+
+p {
+    margin: 0;  /* Remove extra space around the paragraph */
+    display: inline;  /* Makes <p> appear next to the <li> content */
+    font-size: 20px;
+}
