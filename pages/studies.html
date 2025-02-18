@@ -28,9 +28,20 @@
             <h1>Below are the current bible studies booked for the week</h1>
         </div>
 
+        <div id="popup">
+            <h3 id="popup-title">Enter Details</h3>
+            <label>Title: <input type="text" id="title"></label><br><br>
+            <label>Teacher: <input type="text" id="teacher"></label><br><br>
+            <label>Time: <input type="time" id="time"></label><br><br>
+            <label>Description:<br> <textarea id="description"></textarea></label><br><br>
+            <button onclick="saveData()">Save</button>
+            <button onclick="closePopup()">Close</button>
+        </div>
+
+
         <div class="TopSection">
 
-            <div class="monday">
+            <div class="day-div" data-day="monday">
                 <h1>Monday</h1>
                 <ul>
                     <li>Title: <p>Moses and the burning bush</p></li>
@@ -40,7 +51,7 @@
                 </ul>
                 
             </div>
-            <div class="tuesday">
+            <div class="day-div" data-day="tuesday">
                 <h1>Tuesday</h1>
                 <ul>
                     <li>Title: <p></p></li>
@@ -49,7 +60,7 @@
                     <li>Description: <p>description goes here but what will happen now</p></li>
                 </ul>
             </div>
-            <div class="wednesday">
+            <div class="day-div" data-day="wednesday">
                 <h1>Wednesday</h1>
                 <ul>
                     <li>Title: <p></p></li>
@@ -58,7 +69,7 @@
                     <li>Description: <p>description goes here but what will happen now</p></li>
                 </ul>
             </div>
-            <div class="thursday">     
+            <div class="day-div" data-day="thursday">     
                 <h1>Thursday</h1>   
                 <ul>
                     <li>Title: <p></p></li>
@@ -71,7 +82,7 @@
         </div>
         <div class="BottomSection">
 
-            <div class="friday">
+            <div class="day-div" data-day="friday">
                 <h1>Friday</h1>  
                 <ul>
                     <li>Title: <p></p></li>
@@ -80,7 +91,7 @@
                     <li>Description: <p>description goes here but what will happen now</p></li>
                 </ul>
             </div>
-            <div class="saterday">
+            <div class="day-div" data-day="saturday">
                 <h1>Saturday</h1>  
                 <ul>
                     <li>Title: <p></p></li>
@@ -89,7 +100,7 @@
                     <li>Description: <p>description goes here but what will happen now</p></li>
                 </ul>
             </div>
-            <div class="sunday">
+            <div class="day-div" data-day="sunday">
                 <h1>Sunday</h1>  
                 <ul>
                     <li>Title: <p></p></li>
@@ -103,5 +114,6 @@
 
     </div>
 
+    <script src="../javascript/studies.js"></script>
 
 </body>
