@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Open popup when a day div is clicked
     document.querySelectorAll('.day-div').forEach(div => {
         div.addEventListener('click', function () {
-            if (this.classList.contains('saved')) return;  // Ignore clicks on saved divs
+            if (this.classList.contains('saved') || this.classList.contains('booked')) return;  // Ignore clicks on saved or booked divs
 
             selectedDay = this.dataset.day;
             console.log("Clicked:", selectedDay);
@@ -58,11 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
             title: title,
             teacher: teacher,
             time: time,
-            description: description
+            description: description,
+            booked: 1  // Mark it as booked
         });
 
         // Disable the day div after data is saved (so it's no longer clickable)
         document.querySelector(`.day-div[data-day="${selectedDay}"]`).classList.add("saved");
+        document.querySelector(`.day-div[data-day="${selectedDay}"]`).classList.add("booked");
 
         // Send the updated schedule data to the server
         fetch('http://127.0.0.1:5000/save-schedule', {
@@ -102,10 +104,14 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll('.day-div').forEach(div => {
                 const dayData = scheduleData[div.dataset.day];
                 if (dayData && dayData.length > 0) {
-                    div.querySelector('.title p').innerText = dayData[dayData.length - 1].title;
-                    div.querySelector('.teacher p').innerText = dayData[dayData.length - 1].teacher;
-                    div.querySelector('.time p').innerText = dayData[dayData.length - 1].time;
-                    div.querySelector('.description p').innerText = dayData[dayData.length - 1].description;
+                    const lastData = dayData[dayData.length - 1];
+                    div.querySelector('.title p').innerText = lastData.title;
+                    div.querySelector('.teacher p').innerText = lastData.teacher;
+                    div.querySelector('.time p').innerText = lastData.time;
+                    div.querySelector('.description p').innerText = lastData.description;
+                    if (lastData.booked === 1) {
+                        div.classList.add('booked');  // Mark it as booked
+                    }
                 }
             });
         } else {
@@ -113,10 +119,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const dayDiv = document.querySelector(`.day-div[data-day="${day}"]`);
             const dayData = scheduleData[day];
             if (dayData && dayData.length > 0) {
-                dayDiv.querySelector('.title p').innerText = dayData[dayData.length - 1].title;
-                dayDiv.querySelector('.teacher p').innerText = dayData[dayData.length - 1].teacher;
-                dayDiv.querySelector('.time p').innerText = dayData[dayData.length - 1].time;
-                dayDiv.querySelector('.description p').innerText = dayData[dayData.length - 1].description;
+                const lastData = dayData[dayData.length - 1];
+                dayDiv.querySelector('.title p').innerText = lastData.title;
+                dayDiv.querySelector('.teacher p').innerText = lastData.teacher;
+                dayDiv.querySelector('.time p').innerText = lastData.time;
+                dayDiv.querySelector('.description p').innerText = lastData.description;
+                if (lastData.booked === 1) {
+                    dayDiv.classList.add('booked');  // Mark it as booked
+                }
             }
         }
     }
