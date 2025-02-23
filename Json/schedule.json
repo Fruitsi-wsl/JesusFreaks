@@ -1,10 +1,10 @@
 {
-  "monday": [
-    {
-      "title": "asd",
-      "teacher": "asd",
-      "time": "12:14",
-      "description": "sad"
-    }
-  ]
+    "monday": [
+        {
+            "title": "TEST",
+            "teacher": "TEST",
+            "time": "23:12",
+            "description": "TEST"
+        }
+    ]
 }

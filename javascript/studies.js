@@ -1,46 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
     let selectedDay = null;
-    let scheduleData = {}; // Object to store data by day
+    let scheduleData = {};  // Object to store data by day
 
     // Fetch the current schedule data when the page loads
     fetch('/get-schedule')
         .then(response => response.json())
         .then(data => {
-            scheduleData = data; // Store fetched data
+            scheduleData = data;  // Use the data from the server
             console.log("Current schedule data:", scheduleData);
-            updateScheduleUI(); // Update the UI
+            updateUI(); // Optionally, update UI with fetched data
         })
         .catch(error => console.error('Error fetching schedule data:', error));
 
-    // Function to update the UI with schedule data
-    function updateScheduleUI() {
-        document.querySelectorAll('.day-div').forEach(div => {
-            let day = div.dataset.day;
-            let titleEl = div.querySelector(".title p");
-            let teacherEl = div.querySelector(".teacher p");
-            let timeEl = div.querySelector(".time p");
-            let descriptionEl = div.querySelector(".description p");
-
-            if (scheduleData[day] && scheduleData[day].length > 0) {
-                let entry = scheduleData[day][0]; // Get the first entry for the day
-
-                titleEl.textContent = entry.title || "No title";
-                teacherEl.textContent = entry.teacher || "No teacher";
-                timeEl.textContent = entry.time || "No time set";
-                descriptionEl.textContent = entry.description || "No description available";
-
-                // Disable further clicks on this div once updated
-                div.classList.add("disabled"); // Add a class to visually indicate it's disabled
-                div.style.pointerEvents = "none"; // Disable clicking
-            }
-        });
-    }
-
-    // Open popup when a day div is clicked (Only for non-disabled divs)
+    // Open popup when a day div is clicked
     document.querySelectorAll('.day-div').forEach(div => {
         div.addEventListener('click', function () {
-            if (this.classList.contains("disabled")) return; // Prevent interaction if disabled
-
             selectedDay = this.dataset.day;
             console.log("Clicked:", selectedDay); // Debugging
 
@@ -74,13 +48,69 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        scheduleData[selectedDay] = [{ title, teacher, time, description }];
+        if (!scheduleData[selectedDay]) {
+            scheduleData[selectedDay] = [];
+        }
 
-        updateScheduleUI(); // Update UI with the new data
-        closePopup();
+        scheduleData[selectedDay].push({
+            title: title,
+            teacher: teacher,
+            time: time,
+            description: description
+        });
+
+        // Disable the day div after data is saved (so it's no longer clickable)
+        document.querySelector(`.day-div[data-day="${selectedDay}"]`).classList.add("saved");
+
+        // Send the updated schedule data to the server
+        fetch('http://127.0.0.1:5000/save-schedule', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(scheduleData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);  // Show success message
+            closePopup();
+
+            // Optionally update the UI here (e.g., showing the new data on the page)
+            updateUI(selectedDay);  // Custom function to update the div with the new data
+        })
+        .catch(error => {
+            console.error('Error saving data:', error);
+            alert('Failed to save data');
+        });
     }
 
     // Attach event listeners to buttons
     document.querySelector("#popup button:first-of-type").addEventListener("click", saveData);
     document.querySelector("#popup button:last-of-type").addEventListener("click", closePopup);
+
+    // Update the UI with the saved data
+    function updateUI(day) {
+        if (!day) {
+            // Loop through all days and update them
+            document.querySelectorAll('.day-div').forEach(div => {
+                const dayData = scheduleData[div.dataset.day];
+                if (dayData && dayData.length > 0) {
+                    div.querySelector('#title p').innerText = dayData[dayData.length - 1].title;
+                    div.querySelector('#teacher p').innerText = dayData[dayData.length - 1].teacher;
+                    div.querySelector('#time p').innerText = dayData[dayData.length - 1].time;
+                    div.querySelector('#description p').innerText = dayData[dayData.length - 1].description;
+                }
+            });
+        } else {
+            // Update only the clicked day
+            const dayDiv = document.querySelector(`.day-div[data-day="${day}"]`);
+            const dayData = scheduleData[day];
+            if (dayData && dayData.length > 0) {
+                dayDiv.querySelector('#title p').innerText = dayData[dayData.length - 1].title;
+                dayDiv.querySelector('#teacher p').innerText = dayData[dayData.length - 1].teacher;
+                dayDiv.querySelector('#time p').innerText = dayData[dayData.length - 1].time;
+                dayDiv.querySelector('#description p').innerText = dayData[dayData.length - 1].description;
+            }
+        }
+    }
 });
