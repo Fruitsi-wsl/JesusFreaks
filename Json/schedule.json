@@ -1,26 +1,10 @@
 {
-    "monday": [
-        {
-            "description": "asd",
-            "teacher": "test",
-            "time": "21:34",
-            "title": "Test"
-        }
-    ],
-    "tuesday": [
-        {
-            "description": "dtesd",
-            "teacher": "test",
-            "time": "23:04",
-            "title": "test"
-        }
-    ],
     "wednesday": [
         {
-            "title": "Test",
-            "teacher": "test",
-            "time": "23:23",
-            "description": "test\n",
+            "title": "The story of Jonah",
+            "teacher": "Deandre",
+            "time": "20:00",
+            "description": "We will be diving into the story of jonah and what it meant with significance on the resurrection of christ",
             "booked": 1
         }
     ]
