@@ -93,7 +93,7 @@ nav ul li a {
     align-items: center;
     background-image: url("../assets/images/Paper.png");
     background-size: cover;
-    cursor: pointer;
+    cursor: url("../assets/images/pencil.png"), auto;
 }
 
 .TopSection h1{
@@ -115,7 +115,7 @@ nav ul li a {
     align-items: center;
     background-image: url("../assets/images/Paper.png");
     background-size: cover;
-    cursor: pointer;
+    cursor: url("../assets/images/pencil.png"), auto;
 
 }
 
