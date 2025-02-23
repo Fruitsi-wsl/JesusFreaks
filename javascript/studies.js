@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector("#popup button:first-of-type").addEventListener("click", saveData);
     let selectedDay = null;
     let scheduleData = {};  // Object to store data by day
 
