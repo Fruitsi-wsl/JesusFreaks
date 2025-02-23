@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector("#popup button:first-of-type").addEventListener("click", saveData);
     let selectedDay = null;
     let scheduleData = {};  // Object to store data by day
 
@@ -16,8 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Open popup when a day div is clicked
     document.querySelectorAll('.day-div').forEach(div => {
         div.addEventListener('click', function () {
+            if (this.classList.contains('saved')) return;  // Ignore clicks on saved divs
+
             selectedDay = this.dataset.day;
-            console.log("Clicked:", selectedDay); // Debugging
+            console.log("Clicked:", selectedDay);
 
             document.getElementById('popup-title').innerText = `Enter Details for ${selectedDay.charAt(0).toUpperCase() + selectedDay.slice(1)}`;
             document.getElementById('popup').style.display = 'block';
@@ -71,7 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify(scheduleData)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to save data');
+            }
+            return response.json();
+        })
         .then(data => {
             alert(data.message);  // Show success message
             closePopup();

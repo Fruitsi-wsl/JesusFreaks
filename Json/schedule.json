@@ -1,10 +1,10 @@
 {
-    "wednesday": [
+    "tuesday": [
         {
-            "title": "test",
+            "title": "Test",
             "teacher": "test",
-            "time": "12:14",
-            "description": "tesfa"
+            "time": "12:34",
+            "description": "etsaad"
         }
     ]
 }
