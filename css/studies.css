@@ -155,3 +155,8 @@ p {
     padding: 20px;
     box-shadow: 0px 0px 10px gray;
 }
+
+.day-div.booked {
+    pointer-events: none;    /* Disable clicks on booked days */
+    cursor: none;
+}

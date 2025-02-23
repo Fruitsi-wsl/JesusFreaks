@@ -1,4 +1,12 @@
 {
+    "monday": [
+        {
+            "description": "asd",
+            "teacher": "test",
+            "time": "21:34",
+            "title": "Test"
+        }
+    ],
     "tuesday": [
         {
             "description": "dtesd",
@@ -7,12 +15,13 @@
             "title": "test"
         }
     ],
-    "monday": [
+    "wednesday": [
         {
             "title": "Test",
             "teacher": "test",
-            "time": "21:34",
-            "description": "asd"
+            "time": "23:23",
+            "description": "test\n",
+            "booked": 1
         }
     ]
 }
