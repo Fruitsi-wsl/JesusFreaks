@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let scheduleData = {};  // Object to store data by day
 
     // Fetch the current schedule data when the page loads
-    fetch('/get-schedule')
+    fetch('http://127.0.0.1:5000/get-schedule')
         .then(response => response.json())
         .then(data => {
             scheduleData = data;  // Use the data from the server
