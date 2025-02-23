@@ -96,10 +96,10 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll('.day-div').forEach(div => {
                 const dayData = scheduleData[div.dataset.day];
                 if (dayData && dayData.length > 0) {
-                    div.querySelector('#title p').innerText = dayData[dayData.length - 1].title;
-                    div.querySelector('#teacher p').innerText = dayData[dayData.length - 1].teacher;
-                    div.querySelector('#time p').innerText = dayData[dayData.length - 1].time;
-                    div.querySelector('#description p').innerText = dayData[dayData.length - 1].description;
+                    div.querySelector('.title p').innerText = dayData[dayData.length - 1].title;
+                    div.querySelector('.teacher p').innerText = dayData[dayData.length - 1].teacher;
+                    div.querySelector('.time p').innerText = dayData[dayData.length - 1].time;
+                    div.querySelector('.description p').innerText = dayData[dayData.length - 1].description;
                 }
             });
         } else {
@@ -107,10 +107,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const dayDiv = document.querySelector(`.day-div[data-day="${day}"]`);
             const dayData = scheduleData[day];
             if (dayData && dayData.length > 0) {
-                dayDiv.querySelector('#title p').innerText = dayData[dayData.length - 1].title;
-                dayDiv.querySelector('#teacher p').innerText = dayData[dayData.length - 1].teacher;
-                dayDiv.querySelector('#time p').innerText = dayData[dayData.length - 1].time;
-                dayDiv.querySelector('#description p').innerText = dayData[dayData.length - 1].description;
+                dayDiv.querySelector('.title p').innerText = dayData[dayData.length - 1].title;
+                dayDiv.querySelector('.teacher p').innerText = dayData[dayData.length - 1].teacher;
+                dayDiv.querySelector('.time p').innerText = dayData[dayData.length - 1].time;
+                dayDiv.querySelector('.description p').innerText = dayData[dayData.length - 1].description;
             }
         }
     }
