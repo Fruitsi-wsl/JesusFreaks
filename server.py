@@ -32,6 +32,13 @@ def save_schedule_data():
     save_schedule(data)
     return jsonify({"message": "Schedule saved successfully!"})
 
+@app.after_request
+def after_request(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    return response
+
 if __name__ == "__main__":
     import os
     port = int(os.getenv('PORT', 5000))
