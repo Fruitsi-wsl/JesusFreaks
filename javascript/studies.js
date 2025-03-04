@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Clear previous input values
             document.getElementById('title').value = "";
             document.getElementById('teacher').value = "";
+            document.getElementById('date').value = "";
             document.getElementById('time').value = "";
             document.getElementById('description').value = "";
         });
@@ -42,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let title = document.getElementById('title').value;
         let teacher = document.getElementById('teacher').value;
+        let date = document.getElementById('date').value;
         let time = document.getElementById('time').value;
         let description = document.getElementById('description').value;
 
@@ -57,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
         scheduleData[selectedDay].push({
             title: title,
             teacher: teacher,
+            date: date,
             time: time,
             description: description,
             booked: 1  // Mark it as booked
@@ -107,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const lastData = dayData[dayData.length - 1];
                     div.querySelector('.title p').innerText = lastData.title;
                     div.querySelector('.teacher p').innerText = lastData.teacher;
+                    div.querySelector('.date p').innerText = lastData.date;
                     div.querySelector('.time p').innerText = lastData.time;
                     div.querySelector('.description p').innerText = lastData.description;
                     if (lastData.booked === 1) {
@@ -122,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const lastData = dayData[dayData.length - 1];
                 dayDiv.querySelector('.title p').innerText = lastData.title;
                 dayDiv.querySelector('.teacher p').innerText = lastData.teacher;
+                dayDiv.querySelector('.date p').innerText = lastData.date;
                 dayDiv.querySelector('.time p').innerText = lastData.time;
                 dayDiv.querySelector('.description p').innerText = lastData.description;
                 if (lastData.booked === 1) {
