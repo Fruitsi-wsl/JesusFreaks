@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then(data => {
-            alert(data.message);  // Show success message
+            
             closePopup();
 
             // Optionally update the UI here (e.g., showing the new data on the page)
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json();
             })
             .then(data => {
-                alert(data.message);  // Show success message
+
             })
             .catch(error => {
                 console.error('Error saving data:', error);
