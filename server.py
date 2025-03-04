@@ -5,7 +5,7 @@ from flask_cors import CORS  # <-- Import CORS
 import json
 
 app = Flask(__name__)
-CORS(app)  # <-- Enable CORS for all routes
+CORS(app, origins=["https://jesusfreaks.netlify.app"])  # <-- Enable CORS for all routes
 
 
 # Temporary JSON file storage (replace with a real database later)
@@ -33,5 +33,7 @@ def save_schedule_data():
     return jsonify({"message": "Schedule saved successfully!"})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.getenv('PORT', 5000))
+    app.run(host = "0.0.0.0", port= port, debug=True)
 
