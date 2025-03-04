@@ -160,3 +160,20 @@ p {
     pointer-events: none;    /* Disable clicks on booked days */
     cursor: none;
 }
+
+.day-div.booked .clear-button {
+    pointer-events: auto;   /* Enable pointer events for the clear button */
+    cursor: pointer;        /* Ensure the cursor changes to pointer */
+}
+
+.clear-button {
+    position: absolute;  /* Absolute positioning within the .day-div */
+    z-index: 10;         /* Ensure it's above other elements */
+    display: none;       /* Hidden by default */
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+

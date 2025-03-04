@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Open popup when a day div is clicked
     document.querySelectorAll('.day-div').forEach(div => {
         div.addEventListener('click', function () {
-            if (this.classList.contains('saved') || this.classList.contains('booked')) return;  // Ignore clicks on saved or booked divs
+              // Ignore clicks on saved or booked divs
 
             selectedDay = this.dataset.day;
             console.log("Clicked:", selectedDay);
@@ -66,8 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Disable the day div after data is saved (so it's no longer clickable)
-        document.querySelector(`.day-div[data-day="${selectedDay}"]`).classList.add("saved");
-        document.querySelector(`.day-div[data-day="${selectedDay}"]`).classList.add("booked");
+        const dayDiv = document.querySelector(`.day-div[data-day="${selectedDay}"]`);
+        dayDiv.classList.add("saved");
+        dayDiv.classList.add("booked");
+
+        // Show the "Clear" button
+        const clearButton = dayDiv.querySelector(".clear-button");
+        clearButton.style.display = "block";  // Make the Clear button visible
 
         // Send the updated schedule data to the server
         fetch('https://jesusapi.onrender.com/save-schedule', {
@@ -115,6 +120,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     div.querySelector('.description p').innerText = lastData.description;
                     if (lastData.booked === 1) {
                         div.classList.add('booked');  // Mark it as booked
+                        const clearButton = div.querySelector(".clear-button");
+                        clearButton.style.display = "block";  // Make the Clear button visible
                     }
                 }
             });
@@ -131,8 +138,60 @@ document.addEventListener("DOMContentLoaded", function () {
                 dayDiv.querySelector('.description p').innerText = lastData.description;
                 if (lastData.booked === 1) {
                     dayDiv.classList.add('booked');  // Mark it as booked
+                    const clearButton = dayDiv.querySelector(".clear-button");
+                    clearButton.style.display = "block";  // Make the Clear button visible
                 }
             }
         }
     }
+
+    // Clear the day data when the "Clear" button is clicked
+    document.querySelectorAll('.clear-button').forEach(button => {
+        button.addEventListener('click', function (event) {
+            const dayDiv = this.closest('.day-div');
+            const day = dayDiv.dataset.day;
+
+            // Clear the data for that day
+            dayDiv.querySelector('.title p').innerText = '';
+            dayDiv.querySelector('.teacher p').innerText = '';
+            dayDiv.querySelector('.date p').innerText = '';
+            dayDiv.querySelector('.time p').innerText = '';
+            dayDiv.querySelector('.description p').innerText = '';
+
+            // Remove the saved and booked classes
+            dayDiv.classList.remove('booked');
+            dayDiv.classList.remove('saved');
+
+            // Hide the "Clear" button
+            const clearButton = dayDiv.querySelector(".clear-button");
+            clearButton.style.display = "none";  // Hide the Clear button
+
+            // Optionally, clear the data in the schedule object
+            scheduleData[day] = [];
+
+            // Optionally, send the updated data to the server to clear the schedule
+            fetch('https://jesusapi.onrender.com/save-schedule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(scheduleData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to save data');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(data.message);  // Show success message
+            })
+            .catch(error => {
+                console.error('Error saving data:', error);
+                alert('Failed to save data');
+            });
+
+            event.stopPropagation();  // Prevent the click event from propagating to the parent div
+        });
+    });
 });
